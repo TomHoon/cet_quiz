@@ -1,20 +1,25 @@
-let param = [11, 7];
-let result = 13;
-
-const func = (param) => {
-	let max1 = param.sort((a,b) => a-b)[1]
-	let start1 = max1 - param[0];
-	let result1 = [];
-	for(let i = start1 + 1; i <= max1; i ++){
-		result1.push(i);
+const func1 = (left, right) => {
+	let arr = [];
+	while(left <= right) {
+		arr.push(left);
+		left ++;
 	}
 
-	let start2 = param.reduce((acc, cur) => acc + cur) - 1;
-	let result2 = []
-	for (let j = start2; j > max1; j --) {
-		result2.push(j);
-	}
-	return result1.length + result2.length;
+	return arr.reduce((acc, cur) => {
+		let temp = [];
+		for (let i = cur; i >= 1; i --) {
+			if(cur % i == 0) {
+				temp.push(i);
+			}
+		}
+
+		if(temp.length % 2 == 0) {
+			return acc + cur;
+		}
+		if(temp.length % 2 != 0) {
+			return acc - cur;
+		}
+	}, 0);
 }
 
-console.log(func(param));
+console.log(func1(24, 27))
